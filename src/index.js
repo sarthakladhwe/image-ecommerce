@@ -9,7 +9,9 @@ import { ContextProvider } from './Context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ContextProvider>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode> 
   </ContextProvider>
 );
 
