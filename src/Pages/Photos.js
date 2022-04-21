@@ -12,8 +12,6 @@ export default function Photos() {
         )
     })
 
-    console.log(allImages)
-
     return (
         <main className="photos">
             {allImages}
