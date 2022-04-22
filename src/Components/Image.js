@@ -5,18 +5,19 @@ import { Context } from '../Context';
 
 function Image({img, className}) {
 
-    const {toggleFavorite} = React.useContext(Context)
+    const {toggleFavorite, addToCart} = React.useContext(Context)
 
     const [hovered, setHovered] = React.useState(false);
 
-    const heartIcon = hovered && 
-        !img.isFavorite && 
-        <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
+    const heartIcon = () => {
+        if (img.isFavorite) {
+            return <i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
+        } else if (hovered) {
+            return <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
+        }   
+    }
 
-    const filledHeartIcon = img.isFavorite && 
-        <i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
-
-    const cartIcon = hovered && <i className="ri-add-circle-line cart"></i>
+    const cartIcon = hovered && <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
 
     return (
         <div 
@@ -25,8 +26,7 @@ function Image({img, className}) {
             onMouseLeave={() => setHovered(false)}
         >
             <img src={img.url} className='image-grid' alt='' />
-            {heartIcon}
-            {filledHeartIcon}
+            {heartIcon()}
             {cartIcon}
         </div>
     )
