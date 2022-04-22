@@ -5,9 +5,10 @@ import { Context } from '../Context';
 
 function Image({img, className}) {
 
-    const {toggleFavorite, addToCart} = React.useContext(Context)
+    const {toggleFavorite, addToCart, removeFromCart, cartItems} = React.useContext(Context)
 
     const [hovered, setHovered] = React.useState(false);
+    const [inCart, setInCart] = React.useState(false)
 
     const heartIcon = () => {
         if (img.isFavorite) {
@@ -17,7 +18,17 @@ function Image({img, className}) {
         }   
     }
 
-    const cartIcon = hovered && <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
+    function cartIcon() {
+        if(inCart) {
+            return <i className="ri-shopping-cart-fill cart" onClick={() => removeFromCart(img)}></i>
+        } else if (hovered) {
+            return <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
+        }
+    }
+
+    React.useEffect(() => {
+        setInCart(cartItems.some(item => item.id === img.id))
+    }, [cartItems])
 
     return (
         <div 
@@ -27,7 +38,7 @@ function Image({img, className}) {
         >
             <img src={img.url} className='image-grid' alt='' />
             {heartIcon()}
-            {cartIcon}
+            {cartIcon()}
         </div>
     )
 }
