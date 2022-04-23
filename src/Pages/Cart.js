@@ -4,9 +4,10 @@ import CartItem from '../Components/CartItem'
 
 export default function Cart() {
 
-    const {cartItems} = React.useContext(Context)
+    const {cartItems, removeFromCart} = React.useContext(Context)
+
     const cartItemElements = cartItems.map(item => (
-        <CartItem key={item.id} item={item} />
+        <CartItem key={item.id} item={item} removeFromCart={removeFromCart}/>
     ))
 
     return (
