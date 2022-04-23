@@ -8,7 +8,7 @@ function Image({img, className}) {
     const {toggleFavorite, addToCart, removeFromCart, cartItems} = React.useContext(Context)
 
     const [hovered, setHovered] = React.useState(false);
-    const [inCart, setInCart] = React.useState(false)
+    const [inCart, setInCart] = React.useState(false);
 
     const heartIcon = () => {
         if (img.isFavorite) {
