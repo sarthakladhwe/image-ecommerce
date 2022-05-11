@@ -28,7 +28,8 @@ function Image({img, className}) {
     }
 
     React.useEffect(() => {
-        setInCart(cartItems.some(item => item.id === img.id))
+        let sameItem = cartItems.some(item => item.id === img.id)
+        setInCart(sameItem)
     }, [cartItems])
 
     return (
