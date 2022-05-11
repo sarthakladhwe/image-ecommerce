@@ -30,6 +30,7 @@ function Image({img, className}) {
     React.useEffect(() => {
         let sameItem = cartItems.some(item => item.id === img.id)
         setInCart(sameItem)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cartItems])
 
     return (
